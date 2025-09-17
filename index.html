@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agriculture Dashboard</title>
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            background-color: #2c3e50;
+            color: white;
+            height: 100vh;
+            padding-top: 20px;
+            position: fixed;
+        }
+
+        .sidebar h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 22px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+        }
+
+        .sidebar ul li {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #34495e;
+        }
+
+        .sidebar ul li:hover {
+            background-color: #34495e;
+            cursor: pointer;
+        }
+
+        .content {
+            margin-left: 250px;
+            padding: 20px;
+            width: 100%;
+        }
+
+        /* Dashboard Cards */
+        .cards {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 23%;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .card h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            font-size: 18px;
+            color: #2c3e50;
+        }
+
+        /* Chart Container */
+        .chart-container {
+            margin-top: 30px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #34495e;
+            color: white;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <h2>Agriculture Dashboard</h2>
+        <ul>
+            <li>Home</li>
+            <li>Weather</li>
+            <li>Crops Data</li>
+            <li>Soil Health</li>
+            <li>Reports</li>
+        </ul>
+    </div>
+
+    <div class="content">
+        <!-- Dashboard Cards -->
+        <div class="cards">
+            <div class="card">
+                <h3>Total Harvest</h3>
+                <p>350 Tons</p>
+            </div>
+            <div class="card">
+                <h3>Water Usage</h3>
+                <p>200 Liters</p>
+            </div>
+            <div class="card">
+                <h3>Crops Affected</h3>
+                <p>12%</p>
+            </div>
+            <div class="card">
+                <h3>Farmers Online</h3>
+                <p>150</p>
+            </div>
+        </div>
+
+        <!-- Data Chart -->
+        <div class="chart-container">
+            <div class="chart" style="width: 48%; height: 300px; background-color: #fff; border-radius: 10px;">
+                <canvas id="myChart"></canvas>
+            </div>
+            <div class="chart" style="width: 48%; height: 300px; background-color: #fff; border-radius: 10px;">
+                <canvas id="myChart2"></canvas>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>&copy; 2025 Agriculture Dashboard. All rights reserved.</p>
+        </div>
+    </div>
+
+    <!-- Include Chart.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        // Example chart data
+        const ctx1 = document.getElementById('myChart').getContext('2d');
+        const ctx2 = document.getElementById('myChart2').getContext('2d');
+
+        // Chart 1 - Crop Yield
+        const myChart = new Chart(ctx1, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+                datasets: [{
+                    label: 'Crop Yield (in Tons)',
+                    data: [50, 60, 70, 65, 80, 90, 100],
+                    borderColor: '#3498db',
+                    fill: false,
+                    tension: 0.1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Months'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Yield (in Tons)'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Chart 2 - Water Consumption
+        const myChart2 = new Chart(ctx2, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+                datasets: [{
+                    label: 'Water Usage (in Liters)',
+                    data: [200, 250, 300, 275, 350, 400, 450],
+                    backgroundColor: '#1abc9c',
+                    borderColor: '#16a085',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Months'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Water Usage (Liters)'
+                        },
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>
